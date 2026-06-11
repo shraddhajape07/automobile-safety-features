@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <STYLE>
+        TABLE TR,
+        TABLE TD {
+            TEXT-ALIGN: CENTER;
+            VERTICAL-ALIGN: MIDDLE;
+        }
+    </STYLE>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoSafe — Vehicle Safety Systems</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --white: #f5f0e8;
+            --red: #e63928;
+            --yellow: #f5c518;
+            --gray: #1e1e1e;
+            --muted: #888;
+        }
+
+        /* ── BRAKE IMAGE BLOCK ── */
+        .brake-img {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 6px;
+            margin: 2rem 0 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #111;
+        }
+
+        .braking-info .brake-img:first-child {
+            margin-top: 0;
+        }
+
+        .brake-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--white);
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body.light-mode {
+            --black: #f5f0e8;
+            --white: #0a0a0a;
+            --gray: #e6e0d4;
+            --muted: #666;
+        }
+
+        body.light-mode .nav-logo,
+        body.light-mode .nav-links a,
+        body.light-mode h1,
+        body.light-mode h2,
+        body.light-mode h3,
+        body.light-mode .stat-label,
+        body.light-mode .section-sub,
+        body.light-mode .hero-desc,
+        body.light-mode .feature-list li,
+        body.light-mode .abs-bar-label,
+        body.light-mode .cb-label,
+        body.light-mode .quiz-q,
+        body.light-mode .info-table td {
+            color: var(--white);
+        }
+
+        body.light-mode nav {
+            background: rgba(245, 240, 232, 0.85);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        /* ── THEME TOGGLE ── */
+        .theme-toggle {
+            background: none;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            cursor: pointer;
+            padding: 0.4rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.light-mode .theme-toggle {
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* ── PROJECT INFO SECTION ── */
+        .project-info-section {
+            background: var(--gray);
+            padding: 5rem 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .info-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .info-table th,
+        .info-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .info-table td a {
+            color: #0077b5;
+            /* LinkedIn Blue */
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-table td a:hover {
+            text-decoration: underline;
+        }
+
+        .info-table th {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--red);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .info-table td {
+            font-size: 0.9rem;
+            color: rgba(245, 240, 232, 0.8);
+        }
+
+        .info-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .college-link {
+            display: block;
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .college-link:hover {
+            color: var(--red);
+        }
+
+        /* ── NOISE OVERLAY ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.2rem 3rem;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            z-index: 100;
+        }
+
+        .nav-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.08em;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            color: var(--red);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .sdg-badge {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 0.3rem 0.7rem;
+            border-radius: 2px;
+        }
+
+        /* ── HERO ── */
+        .hero {
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            padding: 8rem 3rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg-text {
+            position: absolute;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(120px, 18vw, 260px);
+            color: rgba(255, 255, 255, 0.025);
+            white-space: nowrap;
+            top: 50%;
+            left: -2%;
+            transform: translateY(-50%);
+            user-select: none;
+            letter-spacing: 0.02em;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            width: 32px;
+            height: 1px;
+            background: var(--red);
+            display: inline-block;
+        }
+
+        h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(56px, 7vw, 96px);
+            line-height: 0.95;
+            letter-spacing: 0.02em;
+            margin-bottom: 1.8rem;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--red);
+        }
+
+        .hero-desc {
+            font-size: 1.05rem;
+            color: rgba(245, 240, 232, 0.65);
+            max-width: 420px;
+            line-height: 1.75;
+            margin-bottom: 2.5rem;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: var(--red);
+            color: var(--white);
+            text-decoration: none;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.78rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.9rem 2rem;
+            border-radius: 2px;
+        }
+
+        .hero-cta:hover {
+            background: #c42d1e;
+        }
+
+        .hero-cta svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* animated car diagram */
+        .hero-diagram {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .car-svg-wrap {
+            position: relative;
+        }
+
+        .car-svg-wrap svg {
+            width: 100%;
+            max-width: 520px;
+            height: auto;
+        }
+
+        /* pulse dots */
+        .pulse-dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--red);
+            cursor: pointer;
+        }
+
+        .pulse-dot::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid var(--red);
+            animation: pulse-ring 1.8s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(2.2);
+                opacity: 0;
+            }
+        }
+
+        /* hero stats */
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2.4rem;
+            color: var(--yellow);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 0.2rem;
+        }
+
+        /* ── SECTION SHARED ── */
+        section {
+            padding: 7rem 3rem;
+            position: relative;
+        }
+
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 0.8rem;
+        }
+
+        h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            line-height: 1;
+            letter-spacing: 0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-sub {
+            color: rgba(245, 240, 232, 0.55);
+            font-size: 1rem;
+            max-width: 520px;
+            line-height: 1.7;
+            margin-bottom: 4rem;
+        }
+
+        /* ── ABS SECTION ── */
+        #abs {
+            background: var(--gray);
+        }
+
+        .abs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .abs-visual {
+            position: relative;
+            background: var(--black);
+            border-radius: 4px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: hidden;
+        }
+
+        .abs-visual::before {
+            content: 'ABS';
+            position: absolute;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 120px;
+            color: rgba(230, 57, 40, 0.06);
+            top: -10px;
+            right: -10px;
+            pointer-events: none;
+        }
+
+        .wheel-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .wheel-item {
+            text-align: center;
+        }
+
+        .wheel {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            margin: 0 auto 0.5rem;
+        }
+
+        .wheel::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .wheel.active {
+            border-color: var(--red);
+        }
+
+        .wheel-label {
+            font-size: 0.7rem;
+            color: var(--muted);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .abs-bar {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            margin-bottom: 0.6rem;
+            overflow: hidden;
+        }
+
+        .abs-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--red), var(--yellow));
+            animation: bar-fill 2.5s ease-in-out infinite alternate;
+        }
+
+        .abs-bar-fill.b {
+            animation-delay: 0.3s;
+            width: 80%;
+        }
+
+        .abs-bar-fill.c {
+            animation-delay: 0.6s;
+            width: 60%;
+        }
+
+        @keyframes bar-fill {
+            from {
+                width: 30%;
+            }
+
+            to {
+                width: 95%;
+            }
+        }
+
+        .abs-bar-label {
+            font-size: 0.68rem;
+            color: var(--muted);
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.95rem;
+            color: rgba(245, 240, 232, 0.75);
+            line-height: 1.6;
+        }
+
+        .feature-list li::before {
+            content: '▸';
+            color: var(--red);
+            flex-shrink: 0;
+            margin-top: 0.1rem;
+        }
+
+        .feature-list strong {
+            color: var(--white);
+        }
+
+        /* ── AIRBAGS SECTION ── */
+        #airbags {
+            background: var(--black);
+        }
+
+        .airbag-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .airbag-card {
+            background: var(--gray);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .airbag-card:hover {
+            border-color: rgba(230, 57, 40, 0.4);
+        }
+
+        .airbag-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--red), transparent);
+            opacity: 0;
+        }
+
+        .airbag-card:hover::after {
+            opacity: 1;
+        }
+
+        /* ── AIRBAG IMAGE BLOCK ── */
+        .airbag-icon {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+            border-radius: 6px;
+            margin-bottom: 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #111;
+        }
+
+        .airbag-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .airbag-card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.6rem;
+        }
+
+        .airbag-card p {
+            font-size: 0.9rem;
+            color: rgba(245, 240, 232, 0.6);
+            line-height: 1.6;
+        }
+
+        .airbag-card .ms-badge {
+            display: inline-block;
+            margin-top: 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(245, 197, 24, 0.15);
+            color: var(--yellow);
+            padding: 0.25rem 0.6rem;
+            border-radius: 2px;
+        }
+
+        /* Timeline */
+        .airbag-timeline {
+            margin-top: 4rem;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .airbag-timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 1px;
+            background: linear-gradient(180deg, var(--red), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.4rem;
+            top: 6px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--red);
+        }
+
+        .timeline-item .t-ms {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            color: var(--yellow);
+            letter-spacing: 0.1em;
+        }
+
+        .timeline-item h4 {
+            font-weight: 500;
+            margin: 0.2rem 0 0.4rem;
+        }
+
+        .timeline-item p {
+            font-size: 0.88rem;
+            color: rgba(245, 240, 232, 0.55);
+            line-height: 1.6;
+        }
+
+        /* ── BRAKING SECTION ── */
+        #braking {
+            background: var(--gray);
+        }
+
+        .braking-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .stopping-visual {
+            position: relative;
+            height: 320px;
+        }
+
+        .road {
+            position: absolute;
+            bottom: 40px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .road::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: -1px;
+            bottom: -1px;
+            width: 100%;
+            background: repeating-linear-gradient(90deg,
+                    rgba(245, 197, 24, 0.4) 0px, rgba(245, 197, 24, 0.4) 20px,
+                    transparent 20px, transparent 40px);
+        }
+
+        .car-icon {
+            position: absolute;
+            bottom: 50px;
+            font-size: 2rem;
+            animation: drive-stop 4s ease-in-out infinite;
+        }
+
+        .car-icon.normal {
+            left: 20%;
+            animation-name: drive-normal;
+        }
+
+        .car-icon.abs {
+            left: 20%;
+            animation-name: drive-abs;
+            animation-delay: 2s;
+        }
+
+        @keyframes drive-normal {
+            0% {
+                left: 10%;
+            }
+
+            60% {
+                left: 75%;
+            }
+
+            100% {
+                left: 90%;
+            }
+        }
+
+        @keyframes drive-abs {
+            0% {
+                left: 10%;
+            }
+
+            60% {
+                left: 58%;
+            }
+
+            100% {
+                left: 65%;
+            }
+        }
+
+        .stop-line {
+            position: absolute;
+            bottom: 25px;
+            width: 2px;
+            height: 50px;
+            background: var(--red);
+        }
+
+        .stop-line.normal {
+            right: 10%;
+        }
+
+        .stop-line.abs {
+            right: 32%;
+            border-style: dashed;
+        }
+
+        .stop-label {
+            position: absolute;
+            bottom: 80px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.62rem;
+            color: var(--muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .braking-info h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 0.04em;
+            margin-bottom: 1rem;
+            margin-top: 2rem;
+        }
+
+        .braking-info h3:first-child {
+            margin-top: 0;
+        }
+
+        .braking-info p {
+            font-size: 0.95rem;
+            color: rgba(245, 240, 232, 0.65);
+            line-height: 1.75;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-bar {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 0.8rem 0;
+        }
+
+        .comparison-bar .cb-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.08em;
+            width: 80px;
+            color: var(--muted);
+        }
+
+        .cb-track {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .cb-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--red), #ff6b54);
+            transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .cb-fill.green {
+            background: linear-gradient(90deg, #27ae60, #55d68a);
+        }
+
+        .cb-val {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--white);
+            width: 40px;
+            text-align: right;
+        }
+
+        /* ── QUIZ SECTION ── */
+        #quiz {
+            background: var(--black);
+        }
+
+        .quiz-wrap {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--gray);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            padding: 3rem;
+        }
+
+        .quiz-q {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.8rem;
+            line-height: 1.5;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .quiz-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            padding: 0.9rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .quiz-btn:hover {
+            background: rgba(230, 57, 40, 0.1);
+            border-color: rgba(230, 57, 40, 0.4);
+        }
+
+        .quiz-btn.correct {
+            background: rgba(39, 174, 96, 0.2);
+            border-color: #27ae60;
+        }
+
+        .quiz-btn.wrong {
+            background: rgba(230, 57, 40, 0.2);
+            border-color: var(--red);
+        }
+
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            padding: 1rem 1.2rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            display: none;
+            line-height: 1.6;
+        }
+
+        .quiz-feedback.show {
+            display: block;
+        }
+
+        .quiz-feedback.correct {
+            background: rgba(39, 174, 96, 0.1);
+            border: 1px solid rgba(39, 174, 96, 0.3);
+            color: #7be3a0;
+        }
+
+        .quiz-feedback.wrong {
+            background: rgba(230, 57, 40, 0.1);
+            border: 1px solid rgba(230, 57, 40, 0.3);
+            color: #ff9b8e;
+        }
+
+        .quiz-next {
+            margin-top: 1.5rem;
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+            display: none;
+        }
+
+        .quiz-next.show {
+            display: inline-block;
+        }
+
+        .quiz-next:hover {
+            background: #c42d1e;
+        }
+
+        .quiz-progress {
+            display: flex;
+            gap: 0.4rem;
+            margin-bottom: 2rem;
+        }
+
+        .qp-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .qp-dot.active {
+            background: var(--red);
+        }
+
+        .qp-dot.done {
+            background: #27ae60;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .score-display .score-num {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 5rem;
+            color: var(--yellow);
+            line-height: 1;
+        }
+
+        .score-display p {
+            color: var(--muted);
+            margin-top: 0.5rem;
+        }
+
+        .score-display button {
+            margin-top: 1.5rem;
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.06em;
+            color: var(--white);
+        }
+
+        .footer-logo span {
+            color: var(--red);
+        }
+
+        .footer-sdg {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.68rem;
+            letter-spacing: 0.1em;
+            color: var(--muted);
+            text-transform: uppercase;
+        }
+
+        .sdg-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--yellow);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.9rem;
+            color: var(--black);
+            line-height: 1;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+
+        /* ── SUBTLE REVEAL (Fast & Clean) ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── QUICK UI TRANSITIONS ── */
+        .hero-cta,
+        .theme-toggle,
+        .quiz-btn,
+        .nav-links a,
+        .airbag-card,
+        body {
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.15s ease;
+        }
+
+        /* ── SMOOTH IMAGE ZOOM (Only on hover) ── */
+        .brake-img img,
+        .airbag-icon img {
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .brake-img:hover img,
+        .airbag-icon img:hover {
+            transform: scale(1.03);
+        }
+
+        /* ── NON-DISRUPTIVE HERO FLOAT ── */
+        .car-svg-wrap {
+            position: relative;
+            animation: subtleFloat 5s ease-in-out infinite;
+        }
+
+        @keyframes subtleFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 7rem 1.5rem 4rem;
+            }
+
+            .hero-diagram {
+                display: none;
+            }
+
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .abs-grid,
+            .braking-grid,
+            .airbag-cards {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                flex-direction: column;
+                text-align: center;
+                padding: 2rem 1.5rem;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <a class="nav-logo" href="#"><span>AUTO</span>SAFE</a>
+        <ul class="nav-links">
+            <li><a href="#abs">ABS</a></li>
+            <li><a href="#airbags">Airbags</a></li>
+            <li><a href="#braking">Braking</a></li>
+            <li><a href="#quiz">Quiz</a></li>
+        </ul>
+        <div style="display:flex; align-items:center; gap:1.5rem;">
+           <button class="theme-toggle" id="theme-btn" title="Toggle Theme">
+                <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="5" />
+                    <path
+                        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+                </svg>
+            </button>
+            <div class="sdg-badge">SDG 3 — Good Health &amp; Well-Being</div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-text">SAFETY</div>
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">Vehicle Safety Systems</div>
+            <h1>Designed<br>to <em>Save</em><br>Lives</h1>
+            <p class="hero-desc">Modern vehicles are equipped with advanced safety technologies that dramatically reduce
+                injury and fatality rates. Explore the science behind ABS, airbags, and braking systems.</p>
+            <a href="#abs" class="hero-cta">
+                Explore Systems
+                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                </svg>
+            </a>
+
+            <div class="hero-stats">
+                <div>
+                    <div class="stat-num">40%</div>
+                    <div class="stat-label">Fewer crash deaths with ABS</div>
+                </div>
+                <div>
+                    <div class="stat-num">30%</div>
+                    <div class="stat-label">Fatality reduction from airbags</div>
+                </div>
+                <div>
+                    <div class="stat-num">3</div>
+                    <div class="stat-label">Core safety systems</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-diagram">
+            <div class="car-svg-wrap">
+                <!-- Simple car SVG -->
+                <svg viewBox="0 0 520 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- car body -->
+                    <rect x="60" y="120" width="400" height="90" rx="14" fill="#1e1e1e" stroke="rgba(255,255,255,0.1)"
+                        stroke-width="1.5" />
+                    <!-- cabin -->
+                    <path d="M140 120 L180 60 L340 60 L380 120Z" fill="#252525" stroke="rgba(255,255,255,0.1)"
+                        stroke-width="1.5" />
+                    <!-- windows -->
+                    <path d="M196 70 L185 115 L244 115 L244 70Z" fill="rgba(100,160,255,0.12)"
+                        stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <path d="M260 70 L260 115 L340 115 L338 70Z" fill="rgba(100,160,255,0.12)"
+                        stroke="rgba(255,255,255,0.08)" stroke-width="1" />
+                    <!-- wheels -->
+                    <circle cx="160" cy="210" r="36" fill="#111" stroke="#333" stroke-width="3" />
+                    <circle cx="160" cy="210" r="20" fill="#1a1a1a" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+                    <circle cx="160" cy="210" r="6" fill="rgba(230,57,40,0.6)" />
+                    <circle cx="370" cy="210" r="36" fill="#111" stroke="#333" stroke-width="3" />
+                    <circle cx="370" cy="210" r="20" fill="#1a1a1a" stroke="rgba(255,255,255,0.12)" stroke-width="2" />
+                    <circle cx="370" cy="210" r="6" fill="rgba(230,57,40,0.6)" />
+                    <!-- headlight -->
+                    <rect x="62" y="135" width="18" height="10" rx="3" fill="rgba(245,197,24,0.7)" />
+                    <rect x="62" y="150" width="14" height="6" rx="2" fill="rgba(255,80,60,0.5)" />
+                    <!-- tail -->
+                    <rect x="442" y="135" width="16" height="10" rx="3" fill="rgba(255,60,40,0.5)" />
+                    <!-- airbag dot -->
+                    <circle cx="210" cy="95" r="7" fill="rgba(230,57,40,0.2)" stroke="rgba(230,57,40,0.7)"
+                        stroke-width="1.5" />
+                    <circle cx="210" cy="95" r="3" fill="rgba(230,57,40,0.8)" />
+                    <!-- abs dot -->
+                    <circle cx="160" cy="210" r="26" fill="none" stroke="rgba(230,57,40,0.3)" stroke-width="1"
+                        stroke-dasharray="4 4" />
+                    <!-- brake dot -->
+                    <circle cx="370" cy="210" r="26" fill="none" stroke="rgba(230,57,40,0.3)" stroke-width="1"
+                        stroke-dasharray="4 4" />
+                    <!-- label lines -->
+                    <line x1="210" y1="88" x2="190" y2="55" stroke="rgba(230,57,40,0.4)" stroke-width="1"
+                        stroke-dasharray="3 3" />
+                    <text x="175" y="50" fill="rgba(230,57,40,0.7)" font-family="monospace" font-size="9"
+                        letter-spacing="1">AIRBAG</text>
+                    <line x1="160" y1="184" x2="100" y2="155" stroke="rgba(230,57,40,0.4)" stroke-width="1"
+                        stroke-dasharray="3 3" />
+                    <text x="50" y="152" fill="rgba(230,57,40,0.7)" font-family="monospace" font-size="9"
+                        letter-spacing="1">ABS</text>
+                    <line x1="370" y1="184" x2="410" y2="155" stroke="rgba(230,57,40,0.4)" stroke-width="1"
+                        stroke-dasharray="3 3" />
+                    <text x="415" y="152" fill="rgba(230,57,40,0.7)" font-family="monospace" font-size="9"
+                        letter-spacing="1">BRAKE</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABS SECTION -->
+    <section id="abs">
+        <div class="reveal">
+            <div class="section-tag">System 01</div>
+            <h2>Anti-Lock<br>Braking System</h2>
+            <p class="section-sub">ABS prevents wheels from locking during hard braking, maintaining steering control
+                and reducing stopping distances on slippery surfaces.</p>
+        </div>
+
+        <div class="abs-grid reveal">
+            <div>
+                <ul class="feature-list">
+                    <li>
+                        <div><strong>How It Works:</strong> Wheel speed sensors monitor each wheel. If a wheel begins to
+                            lock, the ECU rapidly modulates brake pressure — releasing and reapplying up to 15 times per
+                            second.</div>
+                    </li>
+                    <li>
+                        <div><strong>Steering Control:</strong> By preventing lock-up, ABS allows the driver to steer
+                            around obstacles even during maximum braking — something impossible with locked wheels.
+                        </div>
+                    </li>
+                    <li>
+                        <div><strong>Threshold Braking:</strong> ABS keeps each wheel at the optimal slip ratio
+                            (~10–20%) where longitudinal grip is maximized for the shortest stopping distance.</div>
+                    </li>
+                    <li>
+                        <div><strong>Sensor Technology:</strong> Each wheel has a toothed ring and magnetic sensor. The
+                            ECU detects deceleration rates exceeding a threshold and triggers the hydraulic modulator.
+                        </div>
+                    </li>
+                    <li>
+                        <div><strong>Pedal Feedback:</strong> Drivers feel a pulsing vibration through the brake pedal —
+                            this is normal and means ABS is working. Maintain firm, steady pressure.</div>
+                    </li>
+                </ul>
+            </div>
+
+          <!-- <div class="abs-visual">
+                <div id="abs-sim-status"
+                    style="position:absolute; top:10px; right:15px; font-family:'Space Mono', monospace; font-size:0.6rem; color:var(--muted);">
+                    STATUS: IDLE</div>
+                <div class="wheel-row">
+                    <div class="wheel-item">
+                        <div class="wheel active" id="w1"></div>
+                        <div class="wheel-label">FL</div>
+                    </div>
+                    <div class="wheel-item">
+                        <div class="wheel" id="w2"></div>
+                        <div class="wheel-label">FR</div>
+                    </div>
+                    <div class="wheel-item">
+                        <div class="wheel active" id="w3"></div>
+                        <div class="wheel-label">RL</div>
+                    </div>
+                    <div class="wheel-item">
+                        <div class="wheel" id="w4"></div>
+                        <div class="wheel-label">RR</div>
+                    </div>
+                </div>
+                <div class="abs-bar-label">BRAKE PRESSURE — ABS MODULATION</div>
+                <div class="abs-bar">
+                    <div class="abs-bar-fill" style="width:80%"></div>
+                </div>
+                <div class="abs-bar">
+                    <div class="abs-bar-fill b"></div>
+                </div>
+                <div class="abs-bar">
+                    <div class="abs-bar-fill c"></div>
+                </div>
+                <div style="margin-top:1.5rem; font-size:0.78rem; color:var(--muted); line-height:1.6;">
+                    Live simulation: ABS modulates pressure independently per wheel.<br>
+                    Pulsing wheels indicate lock prevention in progress.
+                </div>
+                <button id="test-abs-btn"
+                    style="margin-top:1.5rem; background:transparent; border:1px solid var(--red); color:var(--red); padding:0.6rem 1.2rem; font-family:'Space Mono', monospace; font-size:0.7rem; cursor:pointer; width:100%;">SIMULATE
+                    EMERGENCY BRAKING</button>
+            </div>
+        </div>-->
+    </section>
+
+    <!-- AIRBAGS SECTION -->
+    <section id="airbags">
+        <div class="reveal">
+            <div class="section-tag">System 02</div>
+            <h2>Airbag<br>Systems</h2>
+            <p class="section-sub">
+                Supplemental Restraint Systems (SRS) deploy a cushion between the occupant and hard
+                surfaces within milliseconds of impact detection.
+            </p>
+        </div>
+
+        <div class="airbag-cards reveal">
+
+            <!-- CARD 1 -->
+            <div class="airbag-card">
+
+                <div class="airbag-icon">
+                    <img src="https://s3-prod.autonews.com/s3fs-public/zf_bag_in_roof-MAIN_i.jpg"
+                        alt="Frontal Airbag System">
+                </div>
+
+                <h3>Frontal Airbags</h3>
+
+                <p style="color:var(--red)">
+                    Located in the steering wheel and dashboard. Deploy in head-on collisions above
+                    ~25 km/h, cushioning the driver and front passenger from the steering column and
+                    windshield.
+                </p>
+
+                <span class="ms-badge">30–50ms deployment</span>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="airbag-card">
+
+                <div class="airbag-icon">
+                    <img src="https://th.bing.com/th/id/OIP.NZqjQFIjLbFXAkVojz2ODgHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Side Curtain Airbags">
+                </div>
+
+                <h3>Side Curtain Airbags</h3>
+
+                <p style="color:var(--red)">
+                    Deploy from the roofline downward to cover side windows. Critical in T-bone
+                    collisions and rollovers, preventing head contact with door pillars and ejection
+                    through windows.
+                </p>
+
+                <span class="ms-badge">15–25ms deployment</span>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="airbag-card">
+
+                <div class="airbag-icon">
+                    <img src="https://th.bing.com/th/id/OIP.9UrJM6pv-vI2kiqRcEQH6gHaEK?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Knee and Torso Airbags">
+                </div>
+
+                <h3>Knee &amp; Torso Airbags</h3>
+
+                <p style="color:var(--red)">
+                    Knee airbags reduce leg fractures by distributing loads across the lower
+                    extremities. Torso/seat airbags protect the thorax and abdomen in side impacts
+                    from door intrusion.
+                </p>
+
+                <span class="ms-badge">20–40ms deployment</span>
+            </div>
+
+        </div>
+
+        <!-- TIMELINE + FACTS -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:4rem;" class="reveal">
+
+            <div>
+                <h3
+                    style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:1.5rem;">
+                    Deployment Sequence
+                </h3>
+
+                <div class="airbag-timeline">
+
+                    <div class="timeline-item">
+                        <div class="t-ms">0 ms</div>
+                        <h4>Impact Detected</h4>
+                        <p style="color:var(--red)">
+                            Accelerometers and crash sensors detect rapid deceleration.
+                            The ACM (Airbag Control Module) evaluates crash severity.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="t-ms">8–15 ms</div>
+                        <h4>Deployment Signal</h4>
+                        <p style="color:var(--red)">
+                            ACM sends electrical signal to the inflator. Squib (initiator)
+                            ignites the propellant charge inside the module.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="t-ms">20–40 ms</div>
+                        <h4>Full Inflation</h4>
+                        <p style="color:var(--red)">
+                            Nitrogen gas fills the nylon bag completely. The occupant contacts
+                            the fully inflated cushion, spreading impact energy.
+                        </p>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="t-ms">60–80 ms</div>
+                        <h4>Controlled Deflation</h4>
+                        <p style="color:var(--red)">
+                            Vent holes allow controlled deflation, preventing rebound injury.
+                            The entire event concludes in under the blink of an eye.
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div>
+                <h3
+                    style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:1.5rem;">
+                    Key Safety Facts
+                </h3>
+
+                <ul class="feature-list">
+
+                    <li>
+                        Airbags reduce driver fatality risk in frontal crashes by approximately
+                        <strong>29%</strong> when combined with a seatbelt.
+                    </li>
+
+                    <li>
+                        The gas used is nitrogen, generated by the rapid combustion of sodium azide
+                        or similar propellants — a completely controlled chemical reaction.
+                    </li>
+
+                    <li>
+                        Modern vehicles have <strong>6–10 airbags</strong> as standard.
+                        Some luxury vehicles include up to 12, including far-side and center airbags.
+                    </li>
+
+                    <li>
+                        Always wear your seatbelt: airbags are a <em>supplemental</em> system and can
+                        cause injury if the occupant is unbelted and too close to the module.
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- BRAKING SECTION -->
+    <section id="braking">
+        <div class="reveal">
+            <div class="section-tag">System 03</div>
+            <h2>Braking<br>Systems</h2>
+            <p class="section-sub">Understanding the physics and components of automotive braking helps explain why
+                modern stopping performance is so dramatically improved over older vehicles.</p>
+        </div>
+
+        <div class="braking-grid reveal">
+            <div class="braking-info">
+
+                <div class="brake-img">
+                    <img src="https://static.vecteezy.com/system/resources/previews/023/369/414/large_2x/car-disc-brake-system-car-suspension-in-process-of-new-tire-replacement-at-garage-workshop-car-disc-brake-mechanic-check-and-repair-disk-break-rotor-car-in-change-tire-process-at-service-station-photo.JPG"
+                        alt="Disc Brakes">
+                </div>
+                <h3 style="margin-top:0;">Disc Brakes</h3>
+                <p style="color:var(--red)">Cast iron or carbon ceramic rotors are clamped by hydraulic callipers containing brake pads. Friction
+                    converts kinetic energy to heat. Ventilated rotors dissipate heat faster, preventing brake fade
+                    under repeated heavy use.</p>
+
+                <div class="brake-img">
+                    <img src="https://th.bing.com/th/id/OIP.-S3X_Q1dsb9xJcXLhQcxvgHaEO?o=7rm=3&rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Drum Brakes">
+                </div>
+                <h3 style="margin-top:0;">Drum Brakes</h3>
+                <p style="color:var(--red)">Found on some rear axles, curved shoes press outward against a rotating drum. Less effective heat
+                    dissipation but lower cost, still adequate for the lighter braking loads on rear wheels.</p>
+
+                <div class="brake-img">
+                    <img src="https://tse4.mm.bing.net/th/id/OIP.I3mawzl_6Zb7O5AbiJRBzAHaEM?rs=1&pid=ImgDetMain&o=7&rm=3"
+                        alt="Hydraulic System">
+                </div>
+                <h3 style="margin-top:0;">Hydraulic System</h3>
+                <p style="color:var(--red)">Pressing the pedal pushes a piston in the master cylinder, sending pressurised brake fluid through
+                    steel lines and flexible hoses to each wheel's caliper or wheel cylinder — multiplying your foot
+                    force by 30–40×.</p>
+
+                <h3 style="margin-top:2rem;">Stopping Distance Comparison</h3>
+                <div class="comparison-bar">
+                    <span class="cb-label">No ABS</span>
+                    <div class="cb-track">
+                        <div class="cb-fill" style="width:88%"></div>
+                    </div>
+                    <span class="cb-val">44m</span>
+                </div>
+                <div class="comparison-bar">
+                    <span class="cb-label">With ABS</span>
+                    <div class="cb-track">
+                        <div class="cb-fill green" style="width:66%"></div>
+                    </div>
+                    <span class="cb-val">33m</span>
+                </div>
+                <p style="font-size:0.75rem;color:var(--muted);margin-top:0.5rem;">From 60 km/h on wet asphalt. Results
+                    vary by conditions.</p>
+            </div>
+
+            <div>
+                <ul class="feature-list">
+                    <li>
+                        <div><strong>Brake Bias:</strong> More braking force is sent to the front wheels (typically
+                            70/30 split) because weight transfers forward under deceleration, increasing front tyre
+                            grip.</div>
+                    </li>
+                    <li>
+                        <div><strong>Emergency Brake Assist (EBA):</strong> Detects panic braking from rapid pedal
+                            application and automatically applies maximum brake pressure — many drivers don't press hard
+                            enough in emergencies.</div>
+                    </li>
+                    <li>
+                        <div><strong>Electronic Brake-force Distribution (EBD):</strong> Works with ABS to dynamically
+                            adjust front/rear brake bias based on vehicle load and road conditions.</div>
+                    </li>
+                    <li>
+                        <div><strong>Regenerative Braking (EVs):</strong> Electric motors act as generators during
+                            deceleration, recovering kinetic energy as electricity. Physical brakes blend in as needed
+                            for stronger stops.</div>
+                    </li>
+                    <li>
+                        <div><strong>Maintenance Matters:</strong> Brake fluid absorbs moisture over time, lowering its
+                            boiling point. Flush every 2 years. Pads typically last 50,000–70,000 km but should be
+                            inspected regularly.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUIZ SECTION -->
+    <section id="quiz">
+        <div class="reveal" style="text-align:center; margin-bottom:3rem;">
+            <div class="section-tag" style="justify-content:center;">Knowledge Check</div>
+            <h2>Test Your<br>Safety IQ</h2>
+            <p class="section-sub" style="margin:0 auto;">Five questions to reinforce what you've learned about vehicle
+                safety systems.</p>
+        </div>
+
+        <div class="quiz-wrap reveal" id="quiz-container">
+            <!-- JS renders quiz here -->
+        </div>
+    </section>
+
+    
+
+    <script>
+        // ── SUBTLE SCROLL REVEAL ──
+        const reveals = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.05 }); // Lower threshold so it triggers earlier and feels smoother
+
+        reveals.forEach(r => io.observe(r));
+
+       // ── ABS WHEEL ANIMATION & SIMULATION ──
+       const wheels = [document.getElementById('w1'), document.getElementById('w2'), document.getElementById('w3'), document.getElementById('w4')];
+        const absBtn = document.getElementById('test-abs-btn');
+        const absStatus = document.getElementById('abs-sim-status');
+        let isSimulating = false;
+
+        function runABS() {
+            if (isSimulating) return;
+            wheels.forEach(w => w.classList.remove('active'));
+            const combo = [[0, 2], [1, 3], [0, 1, 2], [2, 3], [0, 3], [1, 2, 3], [0, 1, 2, 3], [0], [1], [2, 3]];
+            const pick = combo[Math.floor(Math.random() * combo.length)];
+            pick.forEach(i => wheels[i].classList.add('active'));
+        }
+
+        let absInterval = setInterval(runABS, 600);
+
+        absBtn.addEventListener('click', () => {
+            if (isSimulating) return;
+            isSimulating = true;
+            clearInterval(absInterval);
+
+            absBtn.textContent = "ABS ACTIVE - MODULATING PRESSURE...";
+            absBtn.style.background = "var(--red)";
+            absBtn.style.color = "var(--white)";
+            absStatus.textContent = "STATUS: EMERGENCY BRAKING";
+            absStatus.style.color = "var(--red)";
+
+            // Rapid pulsing simulation (15hz feel)
+            let pulseCount = 0;
+            const pulseInterval = setInterval(() => {
+                wheels.forEach(w => w.classList.toggle('active', Math.random() > 0.3));
+                pulseCount++;
+                if (pulseCount > 30) {
+                    clearInterval(pulseInterval);
+                    isSimulating = false;
+                    absBtn.textContent = "SIMULATION COMPLETE - VEHICLE STOPPED";
+                    absBtn.style.background = "transparent";
+                    absBtn.style.color = "#27ae60";
+                    absBtn.style.borderColor = "#27ae60";
+                    absStatus.textContent = "STATUS: SAFE";
+                    absStatus.style.color = "#27ae60";
+
+                    setTimeout(() => {
+                        absBtn.textContent = "SIMULATE EMERGENCY BRAKING";
+                        absBtn.style.color = "var(--red)";
+                        absBtn.style.borderColor = "var(--red)";
+                        absStatus.textContent = "STATUS: IDLE";
+                        absStatus.style.color = "var(--muted)";
+                        absInterval = setInterval(runABS, 600);
+                    }, 3000);
+                }
+            }, 80);
+        });
+
+        // ── QUIZ ──
+        const questions = [
+            {
+                q: "What does ABS stand for?",
+                opts: ["Automatic Brake System", "Anti-Lock Braking System", "Advanced Braking Sensor", "Axle Braking Support"],
+                ans: 1,
+                exp: "ABS stands for Anti-Lock Braking System. It prevents wheels from locking up during hard braking, maintaining steering control."
+            },
+            {
+                q: "How quickly can a frontal airbag deploy after impact?",
+                opts: ["Within 500 milliseconds", "Within 1–2 seconds", "Within 20–40 milliseconds", "Within 100 milliseconds"],
+                ans: 2,
+                exp: "Frontal airbags fully deploy in just 20–40 milliseconds — faster than the blink of an eye (which takes ~150ms)."
+            },
+            {
+                q: "What gas is used to inflate airbags?",
+                opts: ["Oxygen", "Carbon dioxide", "Helium", "Nitrogen"],
+                ans: 3,
+                exp: "Nitrogen gas rapidly inflates the airbag. It is generated by the controlled combustion of sodium azide or similar propellants in the inflator module."
+            },
+            {
+                q: "Why is more braking force applied to front wheels than rear?",
+                opts: ["Front tyres are larger", "Weight transfers forward under braking, increasing front grip", "Rear brakes are weaker by design", "The engine is in the front"],
+                ans: 1,
+                exp: "Under deceleration, weight shifts forward, pressing the front tyres harder into the road and increasing their traction. Sending more brake force to the front prevents rear lock-up."
+            },
+            {
+                q: "What should you do when ABS activates during an emergency stop?",
+                opts: ["Pump the brakes rapidly", "Release the brake pedal immediately", "Maintain firm steady pressure and steer", "Apply the handbrake as well"],
+                ans: 2,
+                exp: "Maintain firm, steady pressure on the pedal and steer around the obstacle. The pulsing sensation is normal — ABS is doing its job. Releasing pressure deactivates it."
+            }
+        ];
+
+        let current = 0, score = 0, answered = false;
+        let results = []; // Store question results for review
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-container');
+            if (current >= questions.length) {
+                const resultsHTML = results.map((res, i) => `
+                    <div style="text-align:left; border-bottom:1px solid rgba(255,255,255,0.06); padding:1rem 0;">
+                        <span style="color:${res.correct ? '#27ae60' : 'var(--red)'}; font-family:'Space Mono', monospace; font-size:0.75rem;">Q${i + 1} ${res.correct ? 'CORRECT' : 'INCORRECT'}</span>
+                        <div style="font-size:0.9rem; margin-top:0.4rem;">${questions[i].q}</div>
+                        <div style="font-size:0.8rem; color:var(--muted); margin-top:0.4rem; font-style:italic;">${questions[i].exp}</div>
+                    </div>
+                `).join('');
+
+                container.innerHTML = `
+      <div class="score-display">
+        <div class="score-num">${score}/${questions.length}</div>
+        <p>${score === questions.length ? '🏆 Perfect score! You know your safety systems.' : score >= 3 ? '✅ Good work! Review the sections above to improve.' : '📚 Keep studying — safety knowledge saves lives.'}</p>
+        <div style="margin: 2rem 0;">${resultsHTML}</div>
+        <button onclick="restartQuiz()">Retake Quiz</button>
+      </div>`;
+                return;
+            }
+            const q = questions[current];
+            const dots = questions.map((_, i) => `<div class="qp-dot ${i < current ? 'done' : i === current ? 'active' : ''}"></div>`).join('');
+            container.innerHTML = `
+    <div class="quiz-progress">${dots}</div>
+    <div class="quiz-q">Q${current + 1}. ${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o, i) => `<button class="quiz-btn" onclick="answer(${i})">${o}</button>`).join('')}
+    </div>
+    <div class="quiz-feedback" id="qfb"></div>
+    <button class="quiz-next" id="qnext" onclick="nextQ()">${current === questions.length - 1 ? 'See Score →' : 'Next Question →'}</button>
+  `;
+            answered = false;
+        }
+
+        function answer(idx) {
+            if (answered) return;
+            answered = true;
+            const q = questions[current];
+            const btns = document.querySelectorAll('.quiz-btn');
+            const fb = document.getElementById('qfb');
+            const nxt = document.getElementById('qnext');
+
+            const isCorrect = idx === q.ans;
+            results.push({ correct: isCorrect });
+
+            btns.forEach((b, i) => {
+                if (i === q.ans) b.classList.add('correct');
+                else if (i === idx && idx !== q.ans) b.classList.add('wrong');
+                b.style.pointerEvents = 'none';
+            });
+            if (isCorrect) {
+                score++;
+                fb.className = 'quiz-feedback show correct';
+                fb.textContent = '✓ Correct! ' + q.exp;
+            } else {
+                fb.className = 'quiz-feedback show wrong';
+                fb.textContent = '✗ Not quite. ' + q.exp;
+            }
+            nxt.classList.add('show');
+        }
+
+        function nextQ() { current++; renderQuiz(); }
+        function restartQuiz() { current = 0; score = 0; results = []; renderQuiz(); }
+
+        // ── THEME TOGGLE LOGIC ──
+        const themeBtn = document.getElementById('theme-btn');
+        const themeIcon = document.getElementById('theme-icon');
+        const sunIcon = `<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>`;
+        const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+
+        themeBtn.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isLight = document.body.classList.contains('light-mode');
+            themeIcon.innerHTML = isLight ? moonIcon : sunIcon;
+        });
+
+        renderQuiz();
+    </script>
+
+    <!-- PROJECT INFO -->
+    <section class="project-info-section">
+        <div class="info-container">
+            <div>
+                <div class="section-tag">Academic Project</div>
+                <h2>About the Project</h2>
+                <p class="section-sub">This website is developed as a part of the Continuous Internal Assessment (CIA) activity under the 
+                                       course “IT For Engineers (ESIT119)” by the students of First Year Mechanical Engineering, 
+                                       Department of Mechanical Engineering, Sanjivani College of Engineering, Kopargaon, under Sanjivani 
+                                       Rural Educational Society’s, for the Academic Year 2025–26. The project is created for educational 
+                                       and learning purposes using web technologies such as HTML, CSS, and JavaScript. The objective of 
+                                       this activity is to enhance technical knowledge, creativity, and practical web development skills 
+                                       through engineering-based applications and digital presentation. </p>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <h3
+                    style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:1.5rem;">
+                    Group Information</h3>
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>Details</th>
+                            <th>Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Project Title</td>
+                            <td>Automobile Safety Features</td>
+                        </tr>
+                        <tr>
+                            <td>Group Number</td>
+                            <td>Group no. 7</td>
+                        </tr>
+                        <tr>
+                            <td>Faculty Guide</td>
+                            <td>Mr. J.B. Ashtekar</td>
+                        </tr>
+                        <tr>
+                            <td>Faculty Profile</td>
+                            <td><a href="https://www.linkedin.com/in/jaydeep-ashtekar-6a54a1196" target="_blank"
+                                    rel="noopener noreferrer">LinkedIn</a></td>
+                        </tr>
+
+                        <tr>
+                            <td>Department</td>
+                            <td>Mechanical Engineering</td>
+                        </tr>
+                        <tr>
+                            <td>Academic Year</td>
+                            <td>2025–26</td>
+                        </tr>
+                         <tr>
+                            <td>College Name</td>
+                            <td>Sanjivani College Of Engineering, Kopargoan</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="margin-top: 4rem;">
+                <h3
+                    style="font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:0.04em;margin-bottom:1.5rem;">
+                    Group Members</h3>
+                <table class="info-table">
+                    <thead>
+                        <tr>
+                            <th>Sr. No.</th>
+                            <th>Name of Student</th>
+                            <th>Roll No.</th>
+                            <th>Connect</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Shraddha Jape</td>
+                            <td>102</td>
+                            <td><a href="https://www.linkedin.com/in/shraddhajape" target="_blank"
+                                    rel="noopener noreferrer">LinkedIn</a></td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Prathamesh Thorat</td>
+                            <td>103</td>
+                            <td><a href="https://www.linkedin.com/in/prathmesh-thorat-a3a008384" target="_blank"
+                                    rel="noopener noreferrer">LinkedIn</a></td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Vivek Shelke</td>
+                            <td>104</td>
+                            <td><a href="https://www.linkedin.com/in/vivek-shelke-bbb138387?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                    target="_blank" rel="noopener noreferrer">LinkedIn</a></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Gaytri Shingare</td>
+                            <td>105</td>
+                            <td><a href="https://www.linkedin.com/in/gayatri-shingare-38b0b240b?utm_source=share_via&utm_content=profile&utm_medium=member_android"
+                                    target="_blank" rel="noopener noreferrer">LinkedIn</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <a href="https://sanjivanicoe.org.in/" class="college-link">SANJIVANI COLLEGE OF ENGINEERING</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo"><span>AUTO</span>SAFE</div>
+        <div class="footer-sdg">
+            <div class="sdg-icon">SDG<br>3</div>
+            <div>United Nations<br>Good Health &amp; Well-Being</div>
+        </div>
+        
+    </footer>
+</body>
+
+</html>
